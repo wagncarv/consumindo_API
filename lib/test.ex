@@ -13,5 +13,3 @@ defmodule Test do
     #  |> IEx.Info.info
   end
 end
-
-#  ["id", "name", "description", "html_url", "stargazers_count"]

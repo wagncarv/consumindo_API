@@ -6,15 +6,9 @@ defmodule ConsumindoApiWeb.UsersController do
     %{"username" => user} = username
     github_user = ConsumindoApi.get_github_user(user)
 
-    values = Enum.map(github_user, fn e -> Jason.encode!(e) end)
-
+    [head |_] = github_user
     conn
     |> put_status(:ok)
-    |> render("users.json", user: values)
+    |> render("users.json", user: head)
   end
-
-  # defp decode_params(params) do
-  #   params
-  #   |> Enum.map(fn e -> Jason.decode!(e) end)
-  # end
 end
