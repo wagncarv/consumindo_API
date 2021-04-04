@@ -10,6 +10,7 @@ defmodule ConsumindoApi.Github.Client do
   plug Tesla.Middleware.JSON
 
   alias Tesla.Env
+  alias ConsumindoApi.Users.User
 
   @fields ["id", "name", "description", "html_url", "stargazers_count"]
 
@@ -23,6 +24,7 @@ defmodule ConsumindoApi.Github.Client do
     |> get_repos()
     |> get_body()
     |> get_search()
+    |> to_user_struct()
   end
 
   defp get_search({:error, result}), do: {:error, result}
@@ -35,6 +37,16 @@ defmodule ConsumindoApi.Github.Client do
   defp get_fields(item) do
     @fields
     |> Enum.reduce(%{}, fn e, acc -> Map.put(acc, e, Map.get(item, e)) end)
+  end
+
+  defp to_user_struct(list) do
+    list
+    |> Enum.map(fn e ->
+      {:ok, value} =
+        User.build(e["id"], e["name"], e["description"], e["html_url"], e["stargazers_count"])
+
+      value
+    end)
   end
 
   defp get_body({:ok, %Env{body: body}}) when is_map(body), do: {:error, "Invalid"}
