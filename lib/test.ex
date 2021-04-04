@@ -4,7 +4,7 @@ defmodule Test do
   # @fields ["id", "name", "description", "html_url", "stargazers_count"]
 
   def test do
-    Client.search("-")
+    Client.search("     ")
     # Client.get_repos("ppp")
     # |> get_body()
     # |> Enum.map(fn e -> get_fields(e) end)

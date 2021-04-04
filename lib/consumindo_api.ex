@@ -1,3 +1,4 @@
 defmodule ConsumindoApi do
-  # https://github.com/teamon/tesla
+  alias ConsumindoApi.Github.Client, as: GithubClient
+  defdelegate get_github_user(username), to: GithubClient, as: :search
 end
