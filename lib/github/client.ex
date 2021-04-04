@@ -11,9 +11,25 @@ defmodule ConsumindoApi.Github.Client do
 
   alias Tesla.Env
 
+  @fields ["id", "name", "description", "html_url", "stargazers_count"]
+
   def get_repos(user) do
     "#{user}/repos"
     |> get()
+  end
+
+  def search(username) do
+    get_repos(username)
+    |> get_body()
+    |> get_search()
+  end
+
+  defp get_search({:error, result}), do: {:error, result}
+
+  defp get_search({:ok, body}) do
+    IO.inspect(body)
+    body
+    |> Enum.map(fn item -> get_fields(item) end)
   end
 
   defp get_fields(item) do
@@ -23,7 +39,7 @@ defmodule ConsumindoApi.Github.Client do
 
   defp get_body({:ok, %Env{body: body}}) when is_map(body), do: {:error, "Invalid"}
   defp get_body({:ok, %Env{status: 404, body: %{"message" => message}}}), do: {:error, message}
-  defp get_body({:ok, %Env{status: 200, body: body}}), do: body
+  defp get_body({:ok, %Env{status: 200, body: body}}), do: {:ok, body}
 end
 
 " id, name, description, html_url e stargazers_count"
