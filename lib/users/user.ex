@@ -2,7 +2,7 @@ defmodule ConsumindoApi.Users.User do
   @keys [:id, :name, :description, :html_url, :stargazers_count]
   @enforce_keys @keys
   defstruct @keys
-  @derive Jason.Encoder
+  @derive {Jason.Encoder, only: [:id, :name, :description, :html_url, :stargazers_count]}
 
   def build(id, name, description, html_url, stargazers_count) do
     {:ok,
@@ -14,4 +14,7 @@ defmodule ConsumindoApi.Users.User do
        stargazers_count: stargazers_count
      }}
   end
+
+  # def build(_id, _name, _description, _html_url, _stargazers_count),
+  #   do: {:error, "Invalid parameters"}
 end

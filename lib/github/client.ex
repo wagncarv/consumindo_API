@@ -24,7 +24,8 @@ defmodule ConsumindoApi.Github.Client do
     |> get_repos()
     |> get_body()
     |> get_search()
-    |> to_user_struct()
+
+    # |> to_user_struct()
   end
 
   defp get_search({:error, result}), do: {:error, result}
