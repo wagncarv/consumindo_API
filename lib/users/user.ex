@@ -15,6 +15,6 @@ defmodule ConsumindoApi.Users.User do
      }}
   end
 
-  def build(_id, _name, _description, _html_url, _stargazers_count),
-    do: {:error, "Invalid parameters"}
+  # def build(_id, _name, _description, _html_url, _stargazers_count),
+  #   do: {:error, "Invalid parameters"}
 end
