@@ -19,7 +19,7 @@ defmodule ConsumindoApi.Github.Client do
   end
 
   def search(username) do
-    String.trim(username)
+    username
     |> get_repos()
     |> get_body()
     |> get_search()

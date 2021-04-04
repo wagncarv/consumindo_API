@@ -7,7 +7,8 @@ defmodule ConsumindoApiWeb.Router do
 
   scope "/api", ConsumindoApiWeb do
     pipe_through :api
-    get "/users", UsersController, :show
+    get "/users/:username", UsersController, :show
+    # resources "/users", UsersController, except: [:new, :edit]
   end
 
   # Enables LiveDashboard only for development
