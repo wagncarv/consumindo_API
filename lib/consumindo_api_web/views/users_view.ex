@@ -1,9 +1,9 @@
 defmodule ConsumindoApiWeb.UsersView do
   use ConsumindoApiWeb, :view
 
-  def render("users.json", user) do
+  def render("users.json", search) do
     %{
-      github_user: user
+      user: search
     }
   end
 end
