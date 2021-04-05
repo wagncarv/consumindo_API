@@ -24,8 +24,8 @@ defmodule ConsumindoApi.Github.Client do
     |> get_repos()
     |> get_body()
     |> get_search()
-
-    # |> to_user_struct()
+    # |> user_repos()
+    # |> encode()
   end
 
   defp get_search({:error, result}), do: {:error, result}
@@ -49,6 +49,14 @@ defmodule ConsumindoApi.Github.Client do
       value
     end)
   end
+
+  # defp encode(list) do
+  #   list
+  #   |> Enum.map(fn e -> Jason.encode!(e) end)
+  # end
+
+  # defp user_repos(%{conn: %{assigns: %{user: user}}}), do: user
+
 
   defp get_body({:ok, %Env{body: body}}) when is_map(body), do: {:error, "Invalid"}
   defp get_body({:ok, %Env{status: 404, body: %{"message" => message}}}), do: {:error, message}

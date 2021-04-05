@@ -1,8 +1,9 @@
 defmodule ConsumindoApi.Users.User do
   @keys [:id, :name, :description, :html_url, :stargazers_count]
   @enforce_keys @keys
-  defstruct @keys
+
   @derive {Jason.Encoder, only: [:id, :name, :description, :html_url, :stargazers_count]}
+  defstruct @keys
 
   def build(id, name, description, html_url, stargazers_count) do
     {:ok,

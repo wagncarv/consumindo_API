@@ -4,8 +4,8 @@ defmodule ConsumindoApiWeb.UsersController do
   def show(conn, username) do
     %{"username" => user} = username
     github_user = ConsumindoApi.get_github_user(user)
-    IO.inspect(github_user, label: "==========================")
 
+    IO.inspect(github_user, label: "GITHUBUSER =======================================================")#//TODO
     conn
     |> put_status(:ok)
     |> render("users.json", user: github_user)
